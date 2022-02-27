@@ -1,5 +1,5 @@
 class FoosController < ApplicationController
-  before_action :find_foo, only: [:show, :edit, :update, :destroy]
+  before_action :find_foo, only: [:edit, :update, :destroy]
 
   def index
     @foos = Foo.all
@@ -18,10 +18,6 @@ class FoosController < ApplicationController
     end
   end
 
-  def show
-    @foo = find_foo
-  end
-
   def edit
     @foo = find_foo
   end
@@ -35,7 +31,7 @@ class FoosController < ApplicationController
   def destroy
     @foo = find_foo
     @foo.destroy
-      redirect_to tasks_url, :notice => I18n.t(:task_close)
+      redirect_to tasks_url, :notice "Foo not exist"
     end
   end
 
