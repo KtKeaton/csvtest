@@ -1,0 +1,26 @@
+<h1>Foo列表</h1>
+
+<%= link_to "Add Foos" , new_foo_path %>
+
+  <table>
+    <thead>
+      <tr>
+        <td>Foo Name</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @foos.each do |foo| %>
+        <tr>
+          <td>
+          <li>
+            <%= foo.name %>
+            <%= link_to "Edit" , edit_foo_path(foo) %>
+            <%= link_to "Delete" , foo_path(foo), method: :delete, data:{ :confirm=> "R U SURE?" } %>
+           </li>
+          </td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+  
+  <%= link_to "Add foo" , new_foo_path %>

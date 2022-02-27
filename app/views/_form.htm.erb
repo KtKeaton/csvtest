@@ -1,0 +1,19 @@
+<%= form_for(foo) do |form| %>
+  <% if @foo.errors.present? %>
+    <ol>
+      <% @foo.errors.each do |error, message| %>
+        <li>WARNING: <%= "#{error.capitalize}  #{message}" %>
+        </li>
+        <% end %>
+    </ol>
+  <% end %>
+
+      <div>
+        <%= form.label :name, "Foo Name" %>
+          <%= form.text_field :name %>
+      </div>
+
+      <div>
+        <%= form.submit "Save It" %>
+      </div>
+<% end %>
