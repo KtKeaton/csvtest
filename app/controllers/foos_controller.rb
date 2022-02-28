@@ -28,12 +28,11 @@ class FoosController < ApplicationController
     redirect_to foo_path(@foo)
   end
 
-  def destroy
-    @foo = find_foo
-    @foo.destroy
-      redirect_to tasks_url, :notice "Foo not exist"
-    end
-  end
+  # def destroy
+  #   @foo = find_foo
+  #   @foo.destroy
+  #     redirect_to tasks_url, :notice "Foo not exist"
+  # end
 
 private
   def find_foo
