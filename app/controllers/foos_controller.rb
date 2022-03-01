@@ -3,7 +3,29 @@ class FoosController < ApplicationController
 
   def index
     @foos = Foo.all
+    
+    respond_to do |format|
+      format.html
+      format.csv { send_data @foos.export, filename: "foos-#{Date.today}.csv" }
+    end
+
   end
+
+  def export
+    attributes = %w{name}
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |foo|
+        csv << attributes.map{ |attr| foo.send(attr) }
+      end
+    end
+  end
+
+  def name
+    "#{foo_id} #{name}"
+  end
+
 
   def new
     @foo = Foo.new  
