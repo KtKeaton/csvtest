@@ -21,4 +21,5 @@
   </table>
   
   <%= link_to "Add foo" , new_foo_path %>
-  <a href="/export.csv"><button class="btn btn-success">export all</button></a>
+ 
+  <%= link_to("Export as CSV", foos_path(format: :csv)) %>

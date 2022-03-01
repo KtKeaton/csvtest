@@ -3,29 +3,24 @@ class FoosController < ApplicationController
 
   def index
     @foos = Foo.all
-    
-    # respond_to do |format|
-    #   format.html
-    #   format.csv { send_data @foos.export, filename: "foos-#{Date.today}.csv" }
-    # end
-
-  end
-
-  def export
-    all = Foo.all
-    attributes = %w{name}
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-
-      all.each do |foo|
-        csv << attributes.map{ |attr| foo.send(attr) }
-      end
-
-      respond_to do |format|
-          format.csv { send_data @foos.export, filename: "foos-#{Date.today}.csv" }
+    respond_to do |format|
+      format.html
+      format.csv do 
+         send_data FooExportService.perform(@foos), 
+            filename: "foos-#{Date.today}.csv" 
       end
     end
   end
+
+  # def export
+  #   @foos = Foo.all
+  #   respond_to do |format|
+  #     format.csv do 
+  #       send_data FooExportService.perform(@foos), 
+  #         filename: "foos-#{Date.today}.csv" 
+  #     end
+  #   end
+  # end
 
   def name
     "#{foo_id} #{name}"
